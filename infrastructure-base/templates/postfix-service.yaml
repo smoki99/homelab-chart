@@ -1,17 +1,5 @@
-{{- if .Values.postfix.enabled }}
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "infrastructure-base.fullname" . }}-postfix
-  labels:
-    {{- include "infrastructure-base.labels" . | nindent 4 }}
-spec:
-  type: {{ .Values.postfix.service.type }}
-  ports:
-    - port: {{ .Values.postfix.service.port }}
-      targetPort: 25
-      protocol: TCP
-      name: smtp
-  selector:
-    {{- include "infrastructure-base.selectorLabels" . | nindent 4 }}
-{{- end }}
+# This file is now a library template that only manages dependencies
+# Actual deployments are in their own charts (sealed-secrets and postfix)
+# This placeholder ensures compatibility with existing references but doesn't deploy anything
+
+# No actual service content needed for infrastructure-base as a library chart

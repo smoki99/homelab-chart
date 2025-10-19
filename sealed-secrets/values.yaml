@@ -1,0 +1,11 @@
+# Default values for sealed-secrets chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Sealed Secrets configuration - pass through to the upstream Bitnami chart
+sealedSecrets:
+  # Enable or disable the sealed secrets controller
+  enabled: true
+  
+  # Additional values that will be passed to the sealed-secrets chart
+  # See https://github.com/bitnami-labs/sealed-secrets for available options

@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: infrastructure-base
+  name: sealed-secrets
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/smoki99/homelab-chart.git
     targetRevision: HEAD
-    path: infrastructure-base
+    path: sealed-secrets
   destination:
     server: https://kubernetes.default.svc
     namespace: infrastructure
@@ -16,6 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  # This application now acts as a dependency manager for infrastructure services
-  # It manages the relationship between sealed-secrets and postfix, but doesn't deploy them directly  
-  # Actual deployments are handled by their own ArgoCD applications (sealed-secrets & postfix)
