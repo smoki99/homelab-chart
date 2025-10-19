@@ -10,11 +10,11 @@ The homelab-chart project addresses the need for a centralized, GitOps-based inf
 - Difficulty maintaining multiple service configurations
 
 ## How It Should Work
-The project provides Helm charts that can be managed through ArgoCD, allowing for:
-1. Declarative infrastructure definition using Kubernetes manifests
+The project provides independent Helm charts that can be managed through ArgoCD, allowing for:
+1. Declarative infrastructure definition using Kubernetes manifests  
 2. Version-controlled configuration changes
 3. Automated deployment and synchronization with the cluster state
-4. Centralized management of core services like secrets and mail servers
+4. Independent management of core services like secrets and mail servers
 
 ## User Experience Goals
 - Simple setup process with clear documentation
@@ -25,7 +25,7 @@ The project provides Helm charts that can be managed through ArgoCD, allowing fo
 ## Core Services
 1. **Sealed Secrets** - Secure secret management using Bitnami chart
 2. **Postfix Mail Server** - Email service implementation with docker image
-3. **Infrastructure Base** - Foundation for other services to be deployed
+3. **Independent Deployment** - Each service deployed independently through ArgoCD
 
 ## Technical Approach
 - Helm 3 charts following best practices

@@ -17,7 +17,7 @@
 ## Technical Constraints
 - Must work with k3s cluster (1 master, 2 worker nodes)
 - Follow Helm best practices for chart structure and packaging
-- Maintain compatibility with ArgoCD deployment workflows
+- Maintain compatibility with ArgoCD deployment workflows  
 - Ensure proper resource definitions for all deployed services
 - Support configuration through values.yaml files
 
@@ -30,9 +30,9 @@
 - Using `helm create` to initialize chart structure
 - Leveraging remote chart repositories for dependencies
 - Implementing values.yaml files for configuration management
-- Following GitOps patterns with ArgoCD for deployment orchestration
+- Following GitOps patterns with ArgoCD for independent deployment orchestration
 
 ## Configuration Management
-- All service configurations will be managed through Helm values
+- All service configurations are managed through Helm values
 - Environment-specific overrides supported via value files
 - Default configurations provided but easily customizable

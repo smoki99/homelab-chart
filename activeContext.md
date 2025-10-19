@@ -1,33 +1,34 @@
 # Active Context: homelab-chart
 
 ## Current Work Focus
-The current focus is on establishing the foundational Helm chart structure for managing a homelab k3s infrastructure with ArgoCD integration. This includes implementing core services like Sealed Secrets and Postfix mail server.
+The current focus is on maintaining and operating a streamlined Helm chart structure for managing homelab k3s infrastructure with ArgoCD integration. This includes independent management of core services like Sealed Secrets and Postfix mail server.
 
 ## Recent Changes
 - Created project brief documentation
-- Defined product context and requirements
-- Setting up base Helm chart structure
+- Defined product context and requirements  
+- Restructured to eliminate infrastructure-base meta-application approach
+- Implemented independent deployment for all services
 
 ## Next Steps
-1. Create the main Helm chart structure for infrastructure base application
-2. Configure Sealed Secrets chart integration from Bitnami
-3. Implement Postfix server deployment using bokysan/docker-postfix
-4. Set up ArgoCD application manifests for proper deployment orchestration
+1. Maintain and optimize current independent chart structure
+2. Ensure proper integration of Sealed Secrets and Postfix services
+3. Monitor ArgoCD deployments for both applications
+4. Document any operational improvements or patterns discovered
 
 ## Active Decisions and Considerations
 - Using remote chart dependencies for Sealed Secrets to leverage official Bitnami charts
-- Including Postfix as an additional service in the base infrastructure
-- Following Helm best practices for multi-service deployments
-- Planning for future extensibility of the chart structure
+- Maintaining independent deployment approach rather than base application structure  
+- Following Helm best practices for individual service deployments
+- Ensuring future extensibility through modular design
 
 ## Important Patterns and Preferences
 - GitOps workflow with ArgoCD as deployment mechanism
-- Use of remote charts for well-maintained dependencies
+- Use of remote charts for well-maintained dependencies 
 - Consistent naming conventions and directory structures
-- Proper separation of concerns between services
+- Proper separation of concerns between services (now independent)
 
 ## Learnings and Project Insights
-The project benefits from starting with a clear documentation foundation before implementing the technical components. This ensures all requirements are properly understood and documented.
+The project benefits from a clean, modular approach where each service is independently deployable. This provides better control, easier troubleshooting, and more predictable deployments.
 
 ## Implementation Strategy
-This is a foundational chart that will serve as the base for managing all infrastructure in the homelab environment, following GitOps principles through ArgoCD.
+This streamlined chart repository now serves as the basis for managing individual infrastructure components through ArgoCD, following GitOps principles with independent deployments.
