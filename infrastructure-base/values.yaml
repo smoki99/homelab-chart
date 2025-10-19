@@ -3,18 +3,27 @@
 # Declare variables to be passed into your templates.
 
 # Configuration for managing dependencies - this chart now acts as a meta-application
-# that references sealed-secrets and postfix applications through ArgoCD
+# that generates ArgoCD Application manifests for child services
 
-# Sealed Secrets configuration (dependency management)
+# Sealed Secrets configuration 
 sealedSecrets:
   enabled: true
 
-# Postfix server configuration (dependency management)  
+# Postfix server configuration  
 postfix:
   enabled: true
 
-# Namespace configuration for the infrastructure base application
-namespace: "infrastructure"
+# Destination configuration
+destination:
+  namespace: "infrastructure"
+
+# Spec configuration matching the documented Helm approach
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/smoki99/homelab-chart.git
+    targetRevision: HEAD
 
 # Basic configuration for the base application 
 replicaCount: 1

@@ -3,9 +3,6 @@ kind: Application
 metadata:
   name: infrastructure-base
   namespace: argocd
-  annotations:
-    # This helps identify this as a parent application that coordinates other services 
-    argocd.argoproj.io/parent-app: "true"
 spec:
   project: default
   source:
@@ -19,13 +16,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  # This application acts as a meta-application that orchestrates infrastructure services
-  # It manages the relationship between sealed-secrets and postfix applications through ArgoCD dependencies
-  # Actual deployments are handled by their own independent ArgoCD applications:
-  # - sealed-secrets (https://github.com/smoki99/homelab-chart/tree/main/sealed-secrets)
-  # - postfix (https://github.com/smoki99/homelab-chart/tree/main/postfix)
+  # This application acts as a meta-application that generates ArgoCD Application manifests for child services
+  # It manages the relationship between sealed-secrets and postfix applications through generated manifests
+  # Actual deployments are handled by the ArgoCD Applications generated from this chart:
+  # - sealed-secrets (generated manifest)
+  # - postfix (generated manifest)
   
-  # Dependencies ensure proper deployment order and relationship management
-  dependencies:
-    - name: sealed-secrets
-    - name: postfix
+  # Dependencies are now managed through Helm template generation rather than direct ArgoCD dependencies
