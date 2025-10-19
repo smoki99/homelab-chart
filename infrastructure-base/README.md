@@ -27,7 +27,7 @@ The following table lists the configurable parameters for this chart and their d
 |-----------|-------------|---------|
 | `sealedSecrets.enabled` | Enable Sealed Secrets chart integration | `true` |
 | `postfix.enabled` | Enable Postfix server deployment | `true` |
-| `postfix.image` | Postfix Docker image name | `bokysan/docker-postfix` |
+| `postfix.image` | Postfix Docker image name | `boky/postfix` |
 | `postfix.imageTag` | Postfix Docker image tag | `latest` |
 | `postfix.config.domain` | Mail domain configuration | `example.com` |
 | `postfix.config.hostname` | Mail hostname configuration | `mail.example.com` |

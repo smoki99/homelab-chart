@@ -4,7 +4,7 @@ sealedSecrets:
 
 postfix:
   enabled: true
-  image: "bokysan/docker-postfix"
+  image: "boky/postfix"
   imageTag: "latest"
   service:
     type: ClusterIP
