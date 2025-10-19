@@ -1,0 +1,14 @@
+# Test values for infrastructure-base chart
+sealedSecrets:
+  enabled: true
+
+postfix:
+  enabled: true
+  image: "bokysan/docker-postfix"
+  imageTag: "latest"
+  service:
+    type: ClusterIP
+    port: 25
+  config:
+    domain: "example.com"
+    hostname: "mail.example.com"
