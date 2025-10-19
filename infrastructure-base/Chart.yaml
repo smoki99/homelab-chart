@@ -1,0 +1,18 @@
+apiVersion: v2
+name: infrastructure-base
+description: A Helm chart for Kubernetes
+
+# This is an application chart that serves as a meta-application to coordinate infrastructure services
+type: application
+
+# Version numbers following Semantic Versioning 
+version: 0.1.0
+
+# Application version (not expected to follow semantic versioning)
+appVersion: "1.0"
+
+# For ArgoCD orchestration purposes, this acts as the main entry point for all infrastructure components
+# Dependencies are managed through ArgoCD rather than Helm dependencies in this approach
+dependencies:
+  # Note: Actual dependencies will be handled via ArgoCD application manifests,
+  # not Helm chart dependencies to avoid complexity with local paths
