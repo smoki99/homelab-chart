@@ -1,5 +1,6 @@
-# This file is now a library template that only manages dependencies
-# Actual deployments are in their own charts (sealed-secrets and postfix)
-# This placeholder ensures compatibility with existing references but doesn't deploy anything
+# This template file is intentionally left empty to maintain chart structure
+# The actual deployments are managed by separate ArgoCD applications:
+# - sealed-secrets application 
+# - postfix application
 
-# No actual service content needed for infrastructure-base as a library chart
+# Infrastructure-base now acts purely as an orchestrator/dependency manager

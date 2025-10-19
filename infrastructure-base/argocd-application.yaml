@@ -16,6 +16,13 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  # This application now acts as a dependency manager for infrastructure services
-  # It manages the relationship between sealed-secrets and postfix, but doesn't deploy them directly  
-  # Actual deployments are handled by their own ArgoCD applications (sealed-secrets & postfix)
+  # This application now acts as a meta-application that orchestrates infrastructure services
+  # It manages the relationship between sealed-secrets and postfix applications through ArgoCD dependencies
+  # Actual deployments are handled by their own independent ArgoCD applications:
+  # - sealed-secrets (https://github.com/smoki99/homelab-chart/tree/main/sealed-secrets)
+  # - postfix (https://github.com/smoki99/homelab-chart/tree/main/postfix)
+  
+  # Dependencies ensure proper deployment order and relationship management
+  dependencies:
+    - name: sealed-secrets
+    - name: postfix

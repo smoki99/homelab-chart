@@ -1,50 +1,30 @@
-# Infrastructure Base Helm Chart
+# infrastructure-base
 
-This is a foundational Helm chart for managing homelab k3s infrastructure with ArgoCD.
+This is a meta-application chart that manages the dependency relationships between core infrastructure services.
 
-## Overview
+## Architecture Overview
 
-This chart provides the base infrastructure components for your homelab environment, including:
-- Sealed Secrets from Bitnami (for secure secret management)
-- Postfix mail server implementation
+The infrastructure-base chart acts as an orchestrator for:
+- **sealed-secrets**: Secure secret management using Bitnami's sealed-secrets controller
+- **postfix**: Mail server implementation  
 
-## Prerequisites
+## Deployment Flow
 
-- Kubernetes 1.19+
-- Helm 3+
+1. `infrastructure-base` - Meta-application that manages relationships between components
+2. `sealed-secrets` - Independent ArgoCD application for Sealed Secrets deployment  
+3. `postfix` - Independent ArgoCD application for Postfix mail server
 
-## Installing the Chart
-
-```bash
-helm install infrastructure-base ./infrastructure-base
-```
+This structure follows GitOps best practices where each service is independently deployable while maintaining proper dependency management through ArgoCD.
 
 ## Configuration
 
-The following table lists the configurable parameters for this chart and their default values.
+Configuration values are passed through to the respective child applications:
+- `sealedSecrets.enabled`: Controls sealed-secrets deployment
+- `postfix.enabled`: Controls postfix deployment
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `sealedSecrets.enabled` | Enable Sealed Secrets chart integration | `true` |
-| `postfix.enabled` | Enable Postfix server deployment | `true` |
-| `postfix.image` | Postfix Docker image name | `boky/postfix` |
-| `postfix.imageTag` | Postfix Docker image tag | `latest` |
-| `postfix.config.domain` | Mail domain configuration | `example.com` |
-| `postfix.config.hostname` | Mail hostname configuration | `mail.example.com` |
+## Usage
 
-## ArgoCD Integration
-
-This chart is designed to work with ArgoCD. The application manifest can be found in `argocd-application.yaml`.
-
-## Dependencies
-
-- Sealed Secrets (Bitnami Helm Chart)
-
-## Notes
-
-1. Make sure you have the Bitnami repository added:
-   ```bash
-   helm repo add bitnami https://charts.bitnami.com/bitnami
-   ```
-
-2. For production use, consider customizing values for resource limits and security contexts.
+To manage infrastructure components:
+1. Deploy all three applications in ArgoCD
+2. The meta-application ensures proper ordering and relationship management
+3. Each service can be updated independently through its own application
