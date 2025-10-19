@@ -23,7 +23,7 @@ version: 0.1.0
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
 
+# This chart now acts as a meta-application for managing infrastructure dependencies
+# Sealed Secrets and Postfix have been separated into their own applications
+# The sealed-secrets dependency is now only referenced through ArgoCD application dependencies, not actual deployment
 dependencies:
-  - name: sealed-secrets
-    version: "2.5.19"
-    repository: "https://charts.bitnami.com/bitnami"
