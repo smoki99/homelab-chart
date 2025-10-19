@@ -20,6 +20,7 @@ postfix:
   config:
     domain: "example.com"
     hostname: "mail.example.com"
+    ALLOW_EMPTY_SENDER_DOMAINS: "true"
 
 # Override default chart values if needed
 replicaCount: 1
