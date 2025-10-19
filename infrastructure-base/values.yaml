@@ -13,6 +13,9 @@ sealedSecrets:
 postfix:
   enabled: true
 
+# Namespace configuration for the infrastructure base application
+namespace: "infrastructure"
+
 # Basic configuration for the base application 
 replicaCount: 1
 
