@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: infrastructure-base
   namespace: argocd
+  annotations:
+    # This helps identify this as a parent application that coordinates other services 
+    argocd.argoproj.io/parent-app: "true"
 spec:
   project: default
   source:
