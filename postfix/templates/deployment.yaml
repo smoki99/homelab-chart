@@ -1,0 +1,59 @@
+{{- if .Values.postfix.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "postfix.fullname" . }}
+  labels:
+    {{- include "postfix.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "postfix.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.postfix.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "postfix.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.postfix.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "postfix.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.postfix.podSecurityContext | nindent 8 }}
+      containers:
+        - name: postfix
+          securityContext:
+            {{- toYaml .Values.postfix.securityContext | nindent 12 }}
+          image: "{{ .Values.postfix.image }}:{{ .Values.postfix.imageTag }}"
+          ports:
+            - name: smtp
+              containerPort: 25
+              protocol: TCP
+          env:
+            - name: DOMAIN
+              value: {{ .Values.postfix.config.domain | quote }}
+            - name: HOSTNAME
+              value: {{ .Values.postfix.config.hostname | quote }}
+            - name: ALLOW_EMPTY_SENDER_DOMAINS
+              value: {{ .Values.postfix.config.ALLOW_EMPTY_SENDER_DOMAINS | quote }}
+          resources:
+            {{- toYaml .Values.postfix.resources | nindent 12 }}
+      {{- with .Values.postfix.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.postfix.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.postfix.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
