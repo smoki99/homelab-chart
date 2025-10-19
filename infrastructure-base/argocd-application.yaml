@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-org/homelab-chart.git
+    repoURL: https://github.com/smoki99/homelab-chart.git
     targetRevision: HEAD
     path: infrastructure-base
   destination:
