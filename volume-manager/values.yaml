@@ -1,0 +1,7 @@
+storageClass:
+  name: local-path
+  isDefault: true
+provisioner:
+  namespace: kube-system
+  configMapName: local-path-config
+  path: /data
