@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.provisioner.configMapName }}
+  namespace: {{ .Values.provisioner.namespace }}
+data:
+  config.json: |
+    {
+            "nodePathMap":[
+            {
+                    "node":"DEFAULT_PATH_FOR_NON_LISTED_NODES",
+                    "paths":["{{ .Values.provisioner.path }}"]
+            }
+            ]
+    }
