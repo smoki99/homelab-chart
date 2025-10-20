@@ -47,7 +47,11 @@ traefik:
     general:
       level: INFO
 
-  # Deployment settings
+  # Deployment settings - directly mapped to traefik chart deployment config
   deployment:
     minReadySeconds: 0
-    hostNetwork: false
+    
+  # Make sure we have the correct parameter structure 
+  # Let's also try using a more direct approach for critical parameters
+  hostNetwork: false
+  replicas: 1
