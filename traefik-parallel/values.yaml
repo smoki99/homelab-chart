@@ -49,6 +49,7 @@ traefik:
 
   # Deployment settings - directly mapped to traefik chart deployment config
   deployment:
+    kind: DaemonSet
     minReadySeconds: 0
     
   # Make sure we have the correct parameter structure 
