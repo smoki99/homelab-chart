@@ -1,0 +1,7 @@
+apiVersion: v2
+name: portainer-agent
+description: A Helm chart for deploying Portainer Agent using GitOps approach
+
+type: application
+version: 0.1.0
+appVersion: "2.33.2"
