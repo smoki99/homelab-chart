@@ -10,6 +10,7 @@ service:
   type: ClusterIP
   httpPort: 9001
   httpsPort: 9443
+  edgePort: 9000
 
 # Deployment configuration  
 deployment:
@@ -25,3 +26,10 @@ localMgmt: true
 
 # Resource limits and requests 
 resources: {}
+
+# Override the upstream chart values to ensure port 9001 is used consistently
+portainer-agent:
+  service:
+    httpPort: 9001
+    httpsPort: 9443
+    edgePort: 9000
