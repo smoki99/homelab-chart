@@ -8,7 +8,7 @@
 # Service configuration (adjusted for infrastructure namespace)
 service:
   type: ClusterIP
-  httpPort: 9000
+  httpPort: 9001
   httpsPort: 9443
 
 # Deployment configuration  
