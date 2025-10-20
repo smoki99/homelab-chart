@@ -5,6 +5,10 @@
 portainer:
   # Disable full Portainer UI 
   enabled: false
+  
+  # Disable persistence since this is just an agent
+  persistence:
+    enabled: false
 
 # Enable the Portainer agent component  
 agent:
