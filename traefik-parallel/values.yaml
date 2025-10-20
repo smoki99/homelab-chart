@@ -47,8 +47,7 @@ traefik:
     general:
       level: INFO
 
-  # Deployment setings
+  # Deployment settings
   deployment:
     minReadySeconds: 0
     hostNetwork: false
-    
