@@ -13,8 +13,9 @@ traefik:
       exposedPort: 50443
 
   # IngressClass configuration to avoid conflicts with existing setup
+  # Using valid RFC 1123 subdomain name format (lowercase, alphanumeric, hyphens)
   ingressClass:
-    name: "newIngress"
+    name: "traefik-new-ingress"
     isDefaultClass: false
 
   # Service configuration using LoadBalancer type for all cluster nodes  
