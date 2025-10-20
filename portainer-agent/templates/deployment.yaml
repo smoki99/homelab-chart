@@ -35,6 +35,11 @@ spec:
             - containerPort: 9001
               name: agent
               protocol: TCP
+          env:
+            - name: KUBERNETES_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           livenessProbe:
             httpGet:
               path: /
