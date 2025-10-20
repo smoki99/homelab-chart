@@ -20,3 +20,11 @@ spec:
       selfHeal: true
   # Ensure the namespace exists by setting the destination to create it if needed  
   # In a real deployment, ensure infrastructure namespace is already created
+  # Added proper validation fields for ArgoCD applications
+  ignoreDifferences:
+  - group: ""
+    kind: Namespace
+    jsonPointers:
+    - /status
+  # Ensure the namespace exists by setting the destination to create it if needed  
+  # In a real deployment, ensure infrastructure namespace is already created
