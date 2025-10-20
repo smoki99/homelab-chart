@@ -13,10 +13,6 @@ sealedSecrets:
 postfix:
   enabled: true
 
-# Traefik server configuration  
-traefik:
-  enabled: true
-
 # Destination configuration - this is the target namespace for generated applications
 # Note: The actual infrastructure namespace needs to be created separately 
 destination:
