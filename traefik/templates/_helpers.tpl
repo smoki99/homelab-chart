@@ -54,7 +54,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 ServiceAccount name
 */}}
 {{- define "traefik.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
+{{- if .Values.serviceAccount.create | default false }}
 {{- default (include "traefik.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}

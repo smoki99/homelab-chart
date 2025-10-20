@@ -22,7 +22,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.serviceAccount.create | default false }}
       serviceAccountName: {{ include "traefik.serviceAccountName" . }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.traefik.securityContext | nindent 8 }}
       containers:
