@@ -4,10 +4,6 @@ metadata:
   name: {{ include "traefik.fullname" . }}
   labels:
     {{- include "traefik.labels" . | nindent 4 }}
-  {{- with .Values.service.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   type: {{ .Values.traefik.service.type }}
   ports:
