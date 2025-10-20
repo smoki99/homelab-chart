@@ -1,6 +1,0 @@
-dependencies:
-- name: portainer
-  repository: file://../remote-charts/portainer
-  version: 2.33.1
-digest: sha256:818e14955dcbe16dd64902f191ad64c1838b7d8cd658b616d1fe0141e97311e6
-generated: "2025-10-20T12:35:33.571094528+02:00"
