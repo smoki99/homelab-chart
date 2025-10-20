@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "traefik.fullname" . }}
+  labels:
+    {{- include "traefik.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.traefik.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "traefik.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "traefik.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "traefik.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.traefik.securityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.traefik.securityContext | nindent 12 }}
+          image: "{{ .Values.traefik.image }}:{{ .Values.traefik.imageTag }}"
+          imagePullPolicy: {{ .Values.traefik.imagePullPolicy | default "IfNotPresent" }}
+          args:
+            {{- range .Values.traefik.args }}
+            - {{ . | quote }}
+            {{- end }}
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.traefik.containerPorts.metrics }}
+              protocol: TCP
+            - name: traefik
+              containerPort: {{ .Values.traefik.containerPorts.traefik }}
+              protocol: TCP
+            - name: web
+              containerPort: {{ .Values.traefik.containerPorts.web }}
+              protocol: TCP
+            - name: websecure
+              containerPort: {{ .Values.traefik.containerPorts.websecure }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 1
+          resources:
+            {{- toYaml .Values.traefik.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - mountPath: /tmp
+              name: tmp
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+      {{- with .Values.traefik.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.traefik.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      priorityClassName: {{ .Values.traefik.priorityClassName }}
+      automountServiceAccountToken: true

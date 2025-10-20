@@ -1,0 +1,101 @@
+# Default values for traefik chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Traefik deployment configuration
+traefik:
+  enabled: true
+  image: "rancher/mirrored-library-traefik"
+  imageTag: "3.3.6"
+  
+  # Deployment settings
+  replicaCount: 1
+  
+  # Service configuration
+  service:
+    type: LoadBalancer
+    ports:
+      web:
+        port: 80
+        targetPort: web
+      websecure:
+        port: 443
+        targetPort: websecure
+
+  # Entry points configuration (matching your existing setup)
+  entryPoints:
+    web:
+      address: ":8000/tcp"
+    websecure:
+      address: ":8443/tcp"
+    traefik:
+      address: ":8080/tcp"
+    metrics:
+      address: ":9100/tcp"
+
+  # Providers configuration (matching your existing setup)
+  providers:
+    kubernetesCRD:
+      enabled: true
+      allowEmptyServices: true
+    kubernetesIngress:
+      enabled: true
+      allowEmptyServices: true
+      ingressEndpoint:
+        publishedService: "kube-system/traefik"
+
+  # Security context settings (matching your existing setup)
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    runAsGroup: 65532
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+
+  # Resource settings (empty as in your current setup)
+  resources: {}
+
+  # Node selector and tolerations (matching your existing setup)
+  nodeSelector: {}
+  tolerations:
+    - key: "CriticalAddonsOnly"
+      operator: "Exists"
+    - key: "node-role.kubernetes.io/control-plane"
+      effect: "NoSchedule"
+      operator: "Exists"
+    - key: "node-role.kubernetes.io/master"
+      effect: "NoSchedule"
+      operator: "Exists"
+
+  # Priority class (matching your existing setup)
+  priorityClassName: "system-cluster-critical"
+
+  # Container ports
+  containerPorts:
+    metrics: 9100
+    traefik: 8080
+    web: 8000
+    websecure: 8443
+
+  # Arguments (matching your existing deployment)
+  args:
+    - --global.checknewversion
+    - --global.sendanonymoususage
+    - --entryPoints.metrics.address=:9100/tcp
+    - --entryPoints.traefik.address=:8080/tcp
+    - --entryPoints.web.address=:8000/tcp
+    - --entryPoints.websecure.address=:8443/tcp
+    - --api.dashboard=true
+    - --ping=true
+    - --metrics.prometheus=true
+    - --metrics.prometheus.entrypoint=metrics
+    - --providers.kubernetescrd
+    - --providers.kubernetescrd.allowEmptyServices=true
+    - --providers.kubernetesingress
+    - --providers.kubernetesingress.allowEmptyServices=true
+    - --providers.kubernetesingress.ingressendpoint.publishedservice=kube-system/traefik
+    - --entryPoints.websecure.http.tls=true
+    - --log.level=INFO
