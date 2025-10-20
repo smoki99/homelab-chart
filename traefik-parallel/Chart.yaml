@@ -4,3 +4,8 @@ description: Parallel Traefik instance for testing purposes
 type: application
 version: 0.1.0
 appVersion: "v2.10.5"
+
+dependencies:
+  - name: traefik
+    version: 25.0.0
+    repository: file://../remote-chart/traefik

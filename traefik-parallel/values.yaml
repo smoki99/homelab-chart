@@ -1,46 +1,47 @@
-# Custom ports for parallel deployment - using alternate ports 50080/50443
-ports:
-  web:
-    port: 50080
-    nodePort: 30080
-    expose: true
-    exposedPort: 50080
-  websecure:
-    port: 50443
-    nodePort: 30443
-    expose: true
-    exposedPort: 50443
+traefik:
+  # Custom ports for parallel deployment - using alternate ports 50080/50443
+  ports:
+    web:
+      port: 50080
+      nodePort: 30080
+      expose: true
+      exposedPort: 50080
+    websecure:
+      port: 50443
+      nodePort: 30443
+      expose: true
+      exposedPort: 50443
 
-# IngressClass configuration to avoid conflicts with existing setup
-ingressClass:
-  name: "newIngress"
-  isDefaultClass: false
+  # IngressClass configuration to avoid conflicts with existing setup
+  ingressClass:
+    name: "newIngress"
+    isDefaultClass: false
 
-# Service configuration using LoadBalancer type for all cluster nodes  
-service:
-  enabled: true
-  type: LoadBalancer
+  # Service configuration using LoadBalancer type for all cluster nodes  
+  service:
+    enabled: true
+    type: LoadBalancer
 
-# Namespace configuration - will be created by the chart 
-namespace: traefik
+  # Namespace configuration - will be created by the chart 
+  namespace: traefik
 
-# Disable features that might conflict or aren't needed for testing
-dashboard:
-  enabled: false
+  # Disable features that might conflict or aren't needed for testing
+  dashboard:
+    enabled: false
 
-# Security settings for testing environment
-securityContext:
-  enabled: true
+  # Security settings for testing environment
+  securityContext:
+    enabled: true
 
-# Ensure it doesn't interfere with existing Traefik by using different naming conventions
-fullnameOverride: "traefik-parallel"
-nameOverride: "traefik-parallel"
+  # Ensure it doesn't interfere with existing Traefik by using different naming conventions
+  fullnameOverride: "traefik-parallel"
+  nameOverride: "traefik-parallel"
 
-# Disable metrics to avoid conflicts in monitoring  
-metrics:
-  prometheus: null
+  # Disable metrics to avoid conflicts in monitoring  
+  metrics:
+    prometheus: null
 
-# Set log level to INFO for better testing visibility  
-logs:
-  general:
-    level: INFO
+  # Set log level to INFO for better testing visibility  
+  logs:
+    general:
+      level: INFO
