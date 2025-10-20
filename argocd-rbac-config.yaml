@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.csv: |
+    # Admin permissions for all applications and resources
+    p, admin, applications, *, */*, allow
+    p, admin, projects, *, */*, allow
+    p, admin, clusters, *, */*, allow
+    p, admin, repositories, *, */*, allow
+    p, admin, certificates, *, */*, allow
+    p, admin, accounts, *, */*, allow
+    p, admin, gpgkeys, *, */*, allow
+    # Allow all resources in all namespaces for admin  
+    p, admin, *, *, */*, allow
+    
+    # Default policy - deny everything else
+    g, admin, role:admin
+
+  policy.default: "role:admin"
