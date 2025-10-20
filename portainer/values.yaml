@@ -1,0 +1,27 @@
+# Default values for portainer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Portainer configuration - using remote chart dependency from remote-charts
+# Override these values as needed for your specific deployment
+
+# Service configuration (adjusted for infrastructure namespace)
+service:
+  type: ClusterIP
+  httpPort: 9000
+  httpsPort: 9443
+
+# Deployment configuration  
+deployment:
+  replicas: 1
+
+# Persistence settings (enabled by default for Portainer data)
+persistence:
+  enabled: true
+  size: "10Gi"
+
+# Security and access settings
+localMgmt: true
+
+# Resource limits and requests 
+resources: {}
