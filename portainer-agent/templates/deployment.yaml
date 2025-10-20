@@ -40,6 +40,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            - name: AGENT_PORT
+              value: "9001"
           livenessProbe:
             httpGet:
               path: /
