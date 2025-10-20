@@ -1,6 +1,0 @@
-dependencies:
-- name: traefik
-  repository: file://../remote-chart/traefik
-  version: 25.0.0
-digest: sha256:13413cfb9fa1d5f356c98dcd0aafa384c2c300b777eec5b1c5b3a88ed5398499
-generated: "2025-10-20T17:25:33.47131427+02:00"
