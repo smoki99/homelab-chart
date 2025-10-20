@@ -1,12 +1,7 @@
 apiVersion: v2
 name: portainer-agent
-description: A Helm chart for deploying Portainer Agent using remote chart approach
+description: A Helm chart for deploying Portainer Agent
 
 type: application
 version: 0.1.0
 appVersion: "2.19.2"
-
-dependencies:
-  - name: portainer
-    version: 2.33.1
-    repository: file://../remote-charts/portainer-agent/remote-charts/portainer
