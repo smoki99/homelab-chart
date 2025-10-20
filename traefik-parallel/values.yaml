@@ -46,3 +46,9 @@ traefik:
   logs:
     general:
       level: INFO
+
+  # Deployment setings
+  deployment:
+    minReadySeconds: 0
+    hostNetwork: false
+    
