@@ -2,15 +2,15 @@ traefik:
   # Custom ports for parallel deployment - using alternate ports 50080/50443
   ports:
     web:
-      port: 50080
+      port: 80
       nodePort: 30080
       expose: true
-      exposedPort: 50080
+      exposedPort: 80
     websecure:
-      port: 50443
+      port: 443
       nodePort: 30443
       expose: true
-      exposedPort: 50443
+      exposedPort: 443
 
   # IngressClass configuration to avoid conflicts with existing setup
   # Using valid RFC 1123 subdomain name format (lowercase, alphanumeric, hyphens)
