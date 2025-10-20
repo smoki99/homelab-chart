@@ -1,0 +1,9 @@
+{{- if not .Values.namespaceOverride }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace | default "traefik" }}
+  labels:
+    app.kubernetes.io/name: traefik-parallel
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

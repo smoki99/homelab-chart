@@ -104,3 +104,21 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+# Traefik parallel deployment configuration
+traefikParallel:
+  enabled: true
+  namespace: traefik
+  ports:
+    web:
+      port: 50080
+      nodePort: 30080
+    websecure:
+      port: 50443
+      nodePort: 30443
+  ingressClass:
+    name: "newIngress"
+    isDefaultClass: false
+
+# Repository URL for ArgoCD applications - adjust as needed  
+repoUrl: https://github.com/smoki99/homelab-chart.git
